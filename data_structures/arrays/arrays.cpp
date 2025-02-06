@@ -31,13 +31,29 @@ void task_2() {
   cout << sizeof(arrElementCount - 1) << "]" << endl;
 }
 
-void bonus_task() {
-  /* Get the size of each element in an unknown sized array */
+void bonus_task(int arr[], int arrCount) {
+  cout << "Byte Size of Each Element in Array: [";
+  for (int i = 0; i < arrCount - 1; i++) {
+    cout << sizeof(arr[i]) << ",";
+  }
+  // Special case for the last element to avoid trailing comma
+  cout << sizeof(arrCount - 1) << "]" << endl;
 }
 
 int main() {
   task_1();
   task_2();
+
+  /* Bonus Task: Passing an array to a function and determining its size */
+
+  int arr[5] = {1, 2, 3, 4, 5};
+
+  // Due to array decay, where the array turns into a pointer when passed into a
+  // function, sizeof(arr) in the function will not give the correct size, so we
+  // pass it in before the decay
+  int arrCount = sizeof(arr) / sizeof(arr[0]);
+
+  bonus_task(arr, arrCount);
 
   return 0;
 }
