@@ -24,21 +24,14 @@ void task_2() {
   // (arrSize (400 bytes) / sizeOfElement (4 bytes) = 100 Elements)
   int arrElementCount = arrSize / sizeof(arr[0]);
 
-  // Create an array of the same size as the original array
-  int arrElementSizes[arrElementCount];
   // Iterates over the elements of the array, getting the size of each element
-  for (int i = 0; i < arrElementCount; i++) {
-    arrElementSizes[i] = sizeof(arr[i]);
-  }
-
-  // Interates over the elements of the array containing the sizes of each
-  // element, printing the size (in bytes) of eeach element to stdout
-  cout << "Size of Each Element in Array: [";
+  // printing the size (in bytes) of each element to stdout
+  cout << "Byte Size of Each Element in Array: [";
   for (int i = 0; i < arrElementCount - 1; i++) {
-    cout << arrElementSizes[i] << ",";
+    cout << sizeof(arr[i]) << ",";
   }
-  // Speecial case for the last element to avoid trailing comma
-  cout << arrElementSizes[arrElementCount - 1] << "]" << endl;
+  // Special case for the last element to avoid trailing comma
+  cout << sizeof(arrElementCount - 1) << "]" << endl;
 }
 
 void bonus_task() {
