@@ -31,13 +31,14 @@ void task_2() {
   cout << sizeof(arrElementCount - 1) << "]" << endl;
 }
 
-void bonus_task(int arr[], int arrCount) {
-  cout << "Byte Size of Each Element in Array: [";
+// Use a template to allow for any data type
+template <typename T> void bonus_task(T arr[], int arrCount) {
+  cout << "[";
   for (int i = 0; i < arrCount - 1; i++) {
     cout << sizeof(arr[i]) << ",";
   }
   // Special case for the last element to avoid trailing comma
-  cout << sizeof(arrCount - 1) << "]" << endl;
+  cout << sizeof(arr[arrCount - 1]) << "]" << endl;
 }
 
 int main() {
@@ -46,14 +47,19 @@ int main() {
 
   /* Bonus Task: Passing an array to a function and determining its size */
 
-  int arr[5] = {1, 2, 3, 4, 5};
+  int intArr[5] = {1, 2, 3, 4, 5};
+  char charArr[5] = {'b', 'o', 'n', 'u', 's'};
 
   // Due to array decay, where the array turns into a pointer when passed into a
   // function, sizeof(arr) in the function will not give the correct size, so we
   // pass it in before the decay
-  int arrCount = sizeof(arr) / sizeof(arr[0]);
+  int intArrCount = sizeof(intArr) / sizeof(intArr[0]);
 
-  bonus_task(arr, arrCount);
+  cout << "Int Array: ";
+  bonus_task(intArr, intArrCount);
+
+  cout << "Char Array: ";
+  bonus_task(charArr, (sizeof(charArr) / sizeof(charArr[0])));
 
   return 0;
 }
