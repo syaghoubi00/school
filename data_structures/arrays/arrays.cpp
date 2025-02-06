@@ -17,12 +17,9 @@ void task_2() {
 
   int arr[100] = {0}; // Create an array of 100 elements, all initialized to 0
 
-  // Get the total size of the array in bytes
-  int arrSize = sizeof(arr);
-
   // Get the element count by dividing the total size by the size of one element
-  // (arrSize (400 bytes) / sizeOfElement (4 bytes) = 100 Elements)
-  int arrElementCount = arrSize / sizeof(arr[0]);
+  // (arrSizeTotal (400 bytes) / arrSizeElement (4 bytes) = 100 Elements)
+  int arrElementCount = sizeof(arr) / sizeof(arr[0]);
 
   // Iterates over the elements of the array, getting the size of each element
   // printing the size (in bytes) of each element to stdout
