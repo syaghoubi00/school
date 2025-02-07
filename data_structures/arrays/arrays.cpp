@@ -32,7 +32,7 @@ void task_2() {
 }
 
 // Use a template to allow for any data type
-template <typename T> void bonus_task(T arr[], int arrCount) {
+template <typename T> void bonus_task_1(T arr[], int arrCount) {
   cout << "[";
   for (int i = 0; i < arrCount - 1; i++) {
     cout << sizeof(arr[i]) << ",";
@@ -41,11 +41,20 @@ template <typename T> void bonus_task(T arr[], int arrCount) {
   cout << sizeof(arr[arrCount - 1]) << "]" << endl;
 }
 
+// Redefine function to accept a pointer
+template <typename T> void bonus_task_2(T *ptr, int size) {
+  cout << "[";
+  for (int i = 0; i < size - 1; i++) {
+    cout << sizeof(ptr[i]) << ",";
+  }
+  cout << sizeof(ptr[size - 1]) << "]" << endl;
+}
+
 int main() {
   task_1();
   task_2();
 
-  /* Bonus Task: Passing an array to a function and determining its size */
+  /* Bonus Task 1: Passing an array to a function and determining its size */
 
   int intArr[5] = {1, 2, 3, 4, 5};
   char charArr[5] = {'b', 'o', 'n', 'u', 's'};
@@ -56,10 +65,26 @@ int main() {
   int intArrCount = sizeof(intArr) / sizeof(intArr[0]);
 
   cout << "Int Array: ";
-  bonus_task(intArr, intArrCount);
+  bonus_task_1(intArr, intArrCount);
 
   cout << "Char Array: ";
-  bonus_task(charArr, (sizeof(charArr) / sizeof(charArr[0])));
+  bonus_task_1(charArr, (sizeof(charArr) / sizeof(charArr[0])));
+
+  /* Bonus Task 2: Dynamic Arrays */
+
+  // Create a dynamic array (stored on heap vs in stack)
+  char *ptrArr = new char[5];
+
+  for (int i = 0; i < 5; i++) {
+    ptrArr[i] = 'a' + i; // Fill with a,b,c,d,e
+  }
+
+  cout << "Dynamic Array: ";
+  // Must track dynamic array size manually
+  bonus_task_2(ptrArr, 5);
+
+  // Dynamic arrays aren't automatically cleaned up, so we have to delete them
+  delete[] ptrArr;
 
   return 0;
 }
