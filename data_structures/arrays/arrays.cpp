@@ -34,7 +34,7 @@ void task_2() {
     cout << sizeof(arr[i]) << ",";
   }
   // Special case for the last element to avoid trailing comma
-  cout << sizeof(arrElementCount - 1) << "]" << endl;
+  cout << sizeof(arr[arrElementCount - 1]) << "]" << endl;
 }
 
 // Use a template to allow for any data type
