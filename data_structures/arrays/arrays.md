@@ -14,14 +14,14 @@
 
 ### Overview Table
 
-| Operation                     | Number of Steps | Time Complexity |
-| ----------------------------- | --------------- | --------------- |
-| Reading                       | 1 step          | O(1)            |
-| Searching (value not present) | 100 steps       | O(n)            |
-| Insertion (beginning)         | 101 steps       | O(n)            |
-| Insertion (end)               | 1 step          | O(1)            |
-| Deletion (beginning)          | 99 steps        | O(n)            |
-| Deletion (end)                | 1 step          | O(1)            |
+| Operation                     | Number of Steps       | Time Complexity |
+| ----------------------------- | --------------------- | --------------- |
+| Reading                       | 1 step                | O(1)            |
+| Searching (value not present) | 100 steps             | O(n)            |
+| Insertion (beginning)         | 101 steps             | O(n)            |
+| Insertion (end)               | 1 step                | O(1)            |
+| Deletion (beginning)          | 100 steps (depending) | O(n)            |
+| Deletion (end)                | 1 step                | O(1)            |
 
 ### Explanation
 
@@ -59,17 +59,24 @@
 
 #### Deletion at Beginning
 
+Frequency array:
+
+- **Steps:** 100
+- **Breakdown:**
+  - 1 step to remove the first element
+  - 99 steps to shift remaining elements left
+  - Shifting required for all elements except the deleted one
+  - Removing the first element is required because the last element will be
+    duplicated during the shift
+
+Otherwise:
+
 - **Steps:** 99
 - **Breakdown:**
   - 99 steps to shift N-1 elements left
   - Shifting required for all elements except the deleted one
   - There is no need to delete the first element as it will be overwritten
     during the shift
-    <!-- - **Steps:** 100
-    - **Breakdown:**
-      - 1 step to remove the first element
-      - 99 steps to shift remaining elements left
-      - Shifting required for all elements except the deleted one -->
 
 #### Deletion at End
 
@@ -87,7 +94,7 @@
 **Searching Time:** O(n)
 
 - Worst case: T(n) = n
-- Average case: T(n) = n/2
+- Average case: T(n) = n/2 (normal distribution)
 
 **Insertion Time:**
 
@@ -144,3 +151,9 @@ steps.**
 
 - O(N) - Linear time complexity
 - No way to optimize this specific operation as we need to check every element
+
+## References
+
+<https://d-khan.github.io/ds/Data_structures.html#operations-on-arrays>
+
+<https://d-khan.github.io/ds/Searching_bigO.html>
