@@ -1,5 +1,8 @@
+#include <array>
 #include <iostream>
-using namespace std;
+
+using std::cout;
+using std::endl;
 
 void task_1() {
   /* TASK 1:
@@ -7,7 +10,10 @@ void task_1() {
    * any data type of your choice.
    */
 
-  int arr[100] = {0}; // Create an array of 100 elements, all initialized to 0
+  // Create an array of 100 elements, all initialized to 0
+  int arr[100] = {0}; // C style array
+
+  std::array<int, 100> arr2{}; // C++ style array
 }
 
 void task_2() {
@@ -32,7 +38,8 @@ void task_2() {
 }
 
 // Use a template to allow for any data type
-template <typename T> void bonus_task_1(T arr[], int arrCount) {
+// NOTE: The array notation `T arr[]` is equivalent to `T* arr`
+template <typename T> void bonus_task(T arr[], int arrCount) {
   cout << "[";
   for (int i = 0; i < arrCount - 1; i++) {
     cout << sizeof(arr[i]) << ",";
@@ -41,34 +48,24 @@ template <typename T> void bonus_task_1(T arr[], int arrCount) {
   cout << sizeof(arr[arrCount - 1]) << "]" << endl;
 }
 
-// Redefine function to accept a pointer
-template <typename T> void bonus_task_2(T *ptr, int size) {
-  cout << "[";
-  for (int i = 0; i < size - 1; i++) {
-    cout << sizeof(ptr[i]) << ",";
-  }
-  cout << sizeof(ptr[size - 1]) << "]" << endl;
-}
-
 int main() {
   task_1();
   task_2();
 
   /* Bonus Task 1: Passing an array to a function and determining its size */
 
-  int intArr[5] = {1, 2, 3, 4, 5};
-  char charArr[5] = {'b', 'o', 'n', 'u', 's'};
+  // C++ Style
+  std::array<int, 5> intArr{1, 2, 3, 4, 5};
+  cout << "Int Array: ";
+  bonus_task(intArr.data(), intArr.size());
 
+  // C Style
+  char charArr[5] = {'b', 'o', 'n', 'u', 's'}; // C Style
+  cout << "Char Array: ";
   // Due to array decay, where the array turns into a pointer when passed into a
   // function, sizeof(arr) in the function will not give the correct size, so we
   // pass it in before the decay
-  int intArrCount = sizeof(intArr) / sizeof(intArr[0]);
-
-  cout << "Int Array: ";
-  bonus_task_1(intArr, intArrCount);
-
-  cout << "Char Array: ";
-  bonus_task_1(charArr, (sizeof(charArr) / sizeof(charArr[0])));
+  bonus_task(charArr, sizeof(charArr) / sizeof(charArr[0]));
 
   /* Bonus Task 2: Dynamic Arrays */
 
@@ -81,7 +78,7 @@ int main() {
 
   cout << "Dynamic Array: ";
   // Must track dynamic array size manually
-  bonus_task_2(ptrArr, 5);
+  bonus_task(ptrArr, 5);
 
   // Dynamic arrays aren't automatically cleaned up, so we have to delete them
   delete[] ptrArr;
