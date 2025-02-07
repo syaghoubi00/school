@@ -11,9 +11,9 @@ void task_1() {
    */
 
   // Create an array of 100 elements, all initialized to 0
-  int arr[100] = {0}; // C style array
 
-  std::array<int, 100> arr2{}; // C++ style array
+  int cArr[100] = {0};           // C style array
+  std::array<int, 100> cppArr{}; // C++ style array
 }
 
 void task_2() {
@@ -60,7 +60,7 @@ int main() {
   bonus_task(intArr.data(), intArr.size());
 
   // C Style
-  char charArr[5] = {'b', 'o', 'n', 'u', 's'}; // C Style
+  char charArr[5] = {'b', 'o', 'n', 'u', 's'};
   cout << "Char Array: ";
   // Due to array decay, where the array turns into a pointer when passed into a
   // function, sizeof(arr) in the function will not give the correct size, so we
