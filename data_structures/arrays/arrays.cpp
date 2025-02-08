@@ -38,6 +38,11 @@ void task_2() {
 }
 
 void task_5() {
+  /* TASK 5:
+   * Research how to find the memory address of an array. You can use any
+   * programming language of your choice
+   */
+
   // C Style
   int cArr[5] = {1, 2, 3, 4, 5};
   cout << "C-style array: " << endl;
