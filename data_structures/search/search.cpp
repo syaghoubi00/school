@@ -3,13 +3,13 @@
 
 /* Use const to prevent modifycation of the vector.
  * Passing a reference avoids copying the vector */
-void linear_search(const std::vector<int> &arr, int target) {
+void linear_search(const std::vector<int> &vec, int target) {
   int steps = 0; // Counter to track number of comparisons
 
   // Check each element in the array
-  for (int i = 0; i < arr.size(); i++) {
+  for (int i = 0; i < vec.size(); i++) {
     steps++;
-    if (arr[i] == target) {
+    if (vec[i] == target) {
       std::cout << "Linear Search: Found " << target << " in " << steps
                 << " steps" << std::endl;
       return;
@@ -21,10 +21,10 @@ void linear_search(const std::vector<int> &arr, int target) {
             << " steps" << std::endl;
 }
 
-void binary_search(const std::vector<int> &arr, int target) {
+void binary_search(const std::vector<int> &vec, int target) {
   int steps = 0;              // Counter to track number of comparisons
   int left = 0;               // Left boundary of search interval
-  int right = arr.size() - 1; // Right boundary of search interval
+  int right = vec.size() - 1; // Right boundary of search interval
 
   // Continue searching while there are elements to check
   while (left <= right) {
@@ -34,14 +34,14 @@ void binary_search(const std::vector<int> &arr, int target) {
     int mid = left + (right - left) / 2;
 
     // Check if target is found at middle position
-    if (arr[mid] == target) {
+    if (vec[mid] == target) {
       std::cout << "Binary Search: Found " << target << " in " << steps
                 << " steps" << std::endl;
       return;
     }
 
     // If target is greater, ignore left half
-    if (arr[mid] < target)
+    if (vec[mid] < target)
       left = mid + 1;
     // If target is smaller, ignore right half
     else
@@ -60,12 +60,12 @@ int main() {
    * given search. */
 
   // Sorted array for binary search
-  std::vector<int> arr = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+  std::vector<int> vec = {1, 2, 3, 4, 5, 6, 7, 8, 9};
   // Value to search for
   int target = 8;
 
-  linear_search(arr, target);
-  binary_search(arr, target);
+  linear_search(vec, target);
+  binary_search(vec, target);
 
   return 0;
 }
