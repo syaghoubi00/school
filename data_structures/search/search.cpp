@@ -1,6 +1,8 @@
 #include <iostream>
 #include <vector>
 
+/* Use const to prevent modifycation of the vector.
+ * Passing a reference avoids copying the vector */
 void linear_search(const std::vector<int> &arr, int target) {
   int steps = 0; // Counter to track number of comparisons
 
