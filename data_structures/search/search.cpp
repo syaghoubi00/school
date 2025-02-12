@@ -9,14 +9,14 @@ void linear_search(const std::vector<int> &arr, int target) {
     steps++;
     if (arr[i] == target) {
       std::cout << "Linear Search: Found " << target << " in " << steps
-                << " steps\n";
+                << " steps" << std::endl;
       return;
     }
   }
 
   // If target is not found, print the number of steps taken
   std::cout << "Linear Search: " << target << " not found after " << steps
-            << " steps\n";
+            << " steps" << std::endl;
 }
 
 void binary_search(const std::vector<int> &arr, int target) {
@@ -34,7 +34,7 @@ void binary_search(const std::vector<int> &arr, int target) {
     // Check if target is found at middle position
     if (arr[mid] == target) {
       std::cout << "Binary Search: Found " << target << " in " << steps
-                << " steps\n";
+                << " steps" << std::endl;
       return;
     }
 
@@ -48,7 +48,7 @@ void binary_search(const std::vector<int> &arr, int target) {
 
   // If target is not found, print the number of steps taken
   std::cout << "Binary Search: " << target << " not found after " << steps
-            << " steps\n";
+            << " steps" << std::endl;
 }
 
 int main() {
