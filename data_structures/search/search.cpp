@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 
-/* Use const to prevent modifycation of the vector.
+/* Use const to prevent modification of the vector.
  * Passing a reference avoids copying the vector */
 void linear_search(const std::vector<int> &vec, int target) {
   int steps = 0; // Counter to track number of comparisons
@@ -9,6 +9,7 @@ void linear_search(const std::vector<int> &vec, int target) {
   // Check each element in the array
   for (int i = 0; i < vec.size(); i++) {
     steps++;
+
     if (vec[i] == target) {
       std::cout << "Linear Search: Found " << target << " in " << steps
                 << " steps" << std::endl;
@@ -30,7 +31,12 @@ void binary_search(const std::vector<int> &vec, int target) {
   while (left <= right) {
     steps++;
 
-    // Calculate middle point (avoiding potential integer overflow)
+    /* Calculate the middle point, avoiding potential integer overflow.
+     * If adding (left + right) / 2, it may overflow for large values. Since
+     * the right will always be greater than left, we can ensure we stay within
+     * the range of valid integers. Additionally, integer division is always
+     * truncated, which drops any remainder from the division operation; this
+     * ensures a valid index. */
     int mid = left + (right - left) / 2;
 
     // Check if target is found at middle position
