@@ -21,6 +21,12 @@ The steps would be:
 
 Therefore, it takes 4 steps to find 8 in the ordered array.
 
+The worst-case scenario for linear search is when the target value is at the
+end, or isn't present, which requires checking all the elements of the dataset.
+This means linear search has a time complexity of O(n) where n is the number of
+elements. Linear search does not require the data to be sorted, as it
+sequentially checks the data until the target is found.
+
 ## Task 2
 
 > How many steps would binary search take for the previous example?
