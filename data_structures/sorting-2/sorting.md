@@ -2,10 +2,14 @@
 
 ## Task 1
 
-Proving Insertion Sort's Average Case $O(N^2)$:
+> Proof that, under the average-case scenario, the insertion sort has a time
+> complexity of $O(N^2)$. Draw a clear figure and show all the operations
+> clearly.
 
 The average case for insertion sort requires approximately $N^2 \div 4$
 comparisons and $N^2 \div 4$ shifts.
+Proving Insertion Sort's Average Case $O(n^2)$:
+
 
 - On average, each element needs to be compared with about half of the already
   sorted elements
@@ -19,10 +23,14 @@ comparisons and $N^2 \div 4$ shifts.
 
 ## Task 2
 
-For N=5 with 20 operations (worst case):
+> At the start of the insertion sort, the index of the inspected value is set
+> to 1. Change the index of the inspected value and verify that the total number
+> of operations equals 20. Consider the worst-case scenario. Use N=5, where N is
+> the number of elements.
 
 When using insertion sort with N=5, the index should start at 2 (not 1) to get
 exactly 20 operations in worst case. Let's count:
+For N=5 with 20 operations (worst case):
 
 - Index 2: 2 operations
 - Index 3: 6 operations
@@ -30,6 +38,26 @@ exactly 20 operations in worst case. Let's count:
 - Total: 2 + 6 + 12 = 20 operations
 
 ## Task 3
+
+> The following function returns whether or not a capital “X” is present within
+> a string:
+>
+> ```js
+> function containsX(string) {
+>   foundX = false;
+>   for (let i = 0; i < string.length; i++) {
+>     if (string[i] === "X") {
+>       foundX = true;
+>     }
+>   }
+>   return foundX;
+> }
+> ```
+>
+> (a) What is this function’s time complexity regarding Big O Notation?
+>
+> (b) Then, modify the code to improve the algorithm’s efficiency for best- and
+> average-case scenarios.
 
 For the `containsX(string)` function:
 
