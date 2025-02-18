@@ -66,7 +66,7 @@ as it always checks every character.
 
 b) Improved version:
 
-```cpp
+```js
 function containsX(string) {
   for (let i = 0; i < string.length; i++) {
     if (string[i] === "X") {
