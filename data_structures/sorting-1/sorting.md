@@ -9,6 +9,8 @@ For $4N + 16$ steps:
 
 - This is a linear function with a constant
 - We drop constants and coefficients in Big O notation
+- Drop the constant term (16)
+- Drop the coefficient (4)
 - Therefore, this is $O(N)$
 
 ## Task 2
@@ -48,8 +50,9 @@ For $2N^2$:
 For the `double_then_sum` function:
 
 - First loop: Iterates through array once to double numbers: $O(N)$
-- Second loop: Iterates through doubled_array once to sum: $O(N)$
-- When we have sequential operations, we add them: $O(N) + O(N)$
+- Second loop: Iterates through `doubled_array` once to sum: $O(N)$
+- When we have sequential operations, we add them:
+  $O(N) + O(N) = O(N+N) = O(2N)$
 - Simplifies to: $O(N)$
 
 ## Task 4
@@ -70,8 +73,9 @@ For the `double_then_sum` function:
 For the `multiple_cases` function:
 
 - Single loop through the array: $O(N)$
-- For each iteration, performs 3 constant time operations (upcase, downcase,
-  capitalize)
+- For each iteration, performs 3 constant time operations (`upcase`, `downcase`,
+  `capitalize`)
+- $O(N \times (1+1+1)) = O(3N)$
 - Constants don't affect Big O notation
 - Therefore, this is $O(N)$
 
@@ -96,14 +100,16 @@ For the `multiple_cases` function:
 For the `every_other` function:
 
 - Outer loop iterates through entire array: $O(N)$
-- For each even index (approximately $N \div 2$ times):
+- For each even index (approximately half, assuming an equal `odd:even`
+  distribution of numbers): $\frac N 2$
   - Inner loop iterates through entire array: $O(N)$
-- When loops are nested, we multiply: $O(N) \times O(N/2)$
+- When loops are nested, we multiply:
+  $O(N) \times O(\frac N 2) = O(N \times \frac N 2) = O(\frac {N^2} 2)$
 - Simplifies to: $O(N^2)$
 
 ## Summary
 
-- We always drop constants and coefficients
+- We always drop constants and coefficients in Big O notation
 - Sequential operations are added
 - Nested operations are multiplied
 - We use the highest order term only
