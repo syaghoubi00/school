@@ -2,6 +2,9 @@
 
 ## Task 1
 
+> Use Big O Notation to describe the time complexity of an algorithm that takes
+> $4N + 16$
+
 For $4N + 16$ steps:
 
 - This is a linear function with a constant
@@ -9,6 +12,9 @@ For $4N + 16$ steps:
 - Therefore, this is $O(N)$
 
 ## Task 2
+
+> Use Big O Notation to describe the time complexity of an algorithm that takes
+> $2N^2$
 
 For $2N^2$:
 
@@ -18,7 +24,28 @@ For $2N^2$:
 
 ## Task 3
 
-For the `double_then_sum(array)` function:
+> Use Big O Notation to describe the time complexity of the following function,
+> which returns the sum of all numbers of an array after the numbers have been
+> doubled:
+>
+> ```ruby
+> def double_then_sum(array)
+>   doubled_array = []
+>
+>   array.each do |number|
+>     doubled_array << number *= 2
+>   end
+>
+>   sum = 0
+>
+>   doubled_array.each do |number|
+>     sum += number
+>   end
+>   return sum
+> end
+> ```
+
+For the `double_then_sum` function:
 
 - First loop: Iterates through array once to double numbers: $O(N)$
 - Second loop: Iterates through doubled_array once to sum: $O(N)$
@@ -27,7 +54,20 @@ For the `double_then_sum(array)` function:
 
 ## Task 4
 
-For the multiple_cases function:
+> Use Big O Notation to describe the time complexity of the following function,
+> which accepts an array of strings and prints each string in multiple cases:
+>
+> ```ruby
+> def multiple_cases(array)
+>  array.each do |string|
+>   puts string.upcase
+>   puts string.downcase
+>   puts string.capitalize
+>  end
+> end
+> ```
+
+For the `multiple_cases` function:
 
 - Single loop through the array: $O(N)$
 - For each iteration, performs 3 constant time operations (upcase, downcase,
@@ -37,7 +77,23 @@ For the multiple_cases function:
 
 ## Task 5
 
-For the every_other function:
+> The next function iterates over an array of numbers, and for each number whose
+> index is even, it prints the sum of that number plus every number in the
+> array. What is this function’s efficiency in terms of Big O Notation?
+>
+> ```ruby
+> def every_other(array)
+>  array.each_with_index do |number, index|
+>   if index.even?
+>    array.each do |other_number|
+>     puts number + other_number
+>    end
+>   end
+>  end
+> end
+> ```
+
+For the `every_other` function:
 
 - Outer loop iterates through entire array: $O(N)$
 - For each even index (approximately $N \div 2$ times):
