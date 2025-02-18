@@ -6,10 +6,10 @@
 > complexity of $O(N^2)$. Draw a clear figure and show all the operations
 > clearly.
 
-The average case for insertion sort requires approximately $N^2 \div 4$
-comparisons and $N^2 \div 4$ shifts.
 Proving Insertion Sort's Average Case $O(n^2)$:
 
+The average case for insertion sort requires approximately $n^2 \div 4$
+comparisons and $n^2 \div 4$ shifts.
 
 - On average, each element needs to be compared with about half of the already
   sorted elements
@@ -19,7 +19,7 @@ Proving Insertion Sort's Average Case $O(n^2)$:
   - Third element: ~2/2 comparisons ...and so on
 - This forms an arithmetic series: $(0 + 1 + 2 + ... + (n-1)) \div 2$
 - Which simplifies to: $n(n-1) \div 4 \approx N^2 \div 4$. Therefore, the
-  average case is $O(N^2)$
+  average case is $O(n^2)$
 
 ## Task 2
 
@@ -80,7 +80,7 @@ function containsX(string) {
 This improved version:
 
 - Best case: $O(1)$, if `X` is at the beginning
-- Average case: $O(n \div 2)$, still $O(n)$ but practically faster
+- Average case: $O(\frac n 2) = O(n)$
 - Worst case: $O(n)$, if `X` is at the end or not present
 
 The main improvement is the early return when `X` is found, avoiding unnecessary
