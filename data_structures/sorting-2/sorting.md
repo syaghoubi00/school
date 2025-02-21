@@ -28,14 +28,14 @@ comparisons and $n^2 \div 4$ shifts.
 > of operations equals 20. Consider the worst-case scenario. Use N=5, where N is
 > the number of elements.
 
-When using insertion sort with N=5, the index should start at 2 (not 1) to get
-exactly 20 operations in worst case. Let's count:
 For N=5 with 20 operations (worst case):
 
-- Index 2: 2 operations
-- Index 3: 6 operations
-- Index 4: 12 operations
-- Total: 2 + 6 + 12 = 20 operations
+- Index 0: 0 operations (0 comparison + 0 swap) - assume it is sorted
+- Index 1: 2 operations (1 comparison + 1 swap)
+- Index 2: 4 operations (2 comparisons + 2 swaps)
+- Index 3: 6 operations (3 comparisons + 3 swaps)
+- Index 4: 8 operations (4 comparisons + 4 swaps) Total: 0 + 2 + 4 + 6 + 8 = 20
+  operations
 
 ## Task 3
 
