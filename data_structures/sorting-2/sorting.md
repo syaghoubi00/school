@@ -59,9 +59,9 @@ For N=5 with 20 operations (worst case):
 > (b) Then, modify the code to improve the algorithm’s efficiency for best- and
 > average-case scenarios.
 
-For the `containsX(string)` function:
+For the `containsX` function:
 
-a) Time Complexity: Current complexity is $O(n)$ where `n` is the string length,
+a) Time Complexity: Current complexity is $O(n)$ where $n$ is the string length,
 as it always checks every character.
 
 b) Improved version:
@@ -80,7 +80,7 @@ function containsX(string) {
 This improved version:
 
 - Best case: $O(1)$, if `X` is at the beginning
-- Average case: $O(\frac n 2) = O(n)$
+- Average case: $O(\frac n 2) = O(n)$, if `X` is in the middle
 - Worst case: $O(n)$, if `X` is at the end or not present
 
 The main improvement is the early return when `X` is found, avoiding unnecessary
