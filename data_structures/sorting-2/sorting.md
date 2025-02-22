@@ -116,6 +116,11 @@ For N=5 with 20 operations (worst case):
 - Index 4: 8 operations (4 comparisons + 4 swaps) Total: 0 + 2 + 4 + 6 + 8 = 20
   operations
 
+We begin the insertion sort at index 1 rather than index 0 because the first
+element (at index 0) is considered already sorted as it has no elements to its
+left for comparison. This 'optimization' eliminates an unnecessary iteration
+without affecting the algorithm's correctness.
+
 ## Task 3
 
 > The following function returns whether or not a capital “X” is present within
