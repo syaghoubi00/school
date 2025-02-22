@@ -8,18 +8,41 @@
 
 Proving Insertion Sort's Average Case $O(n^2)$:
 
-The average case for insertion sort requires approximately $n^2 \div 4$
-comparisons and $n^2 \div 4$ shifts.
+1. Basic Concept:
+   - Insertion sort works by taking each element and comparing it to the value
+     next to it, then swapping it with that value if it needs to. Where, when
+     sorting a list into ascending order:
+     - Compare the current element with the element to the left
+     - If the element to the left is greater, swap the two values
+     - Continue this compare and swap process until the element to the left is
+       less than the current element
+2. Operations:
+   - Index 1: 2 operations (1 comparison + 1 swap)
+     - Starting from the second element (index 1), since we assume the first
+       element is already sorted
+   - Index 2: 4 operations (2 comparisons + 2 swaps)
+   - And so on, until the last element
+   - For $n$ elements using index $i$, the total operations will be
+     $\sum_{i=2}^n \frac {i(i-1)} 2$
+3. Math:
 
-- On average, each element needs to be compared with about half of the already
-  sorted elements
-- For `N` elements:
-  - First element: 0 comparisons
-  - Second element: ~1/2 comparisons
-  - Third element: ~2/2 comparisons ...and so on
-- This forms an arithmetic series: $(0 + 1 + 2 + ... + (n-1)) \div 2$
-- Which simplifies to: $n(n-1) \div 4 \approx N^2 \div 4$. Therefore, the
-  average case is $O(n^2)$
+   - On average, we can assume the element will be halfway to where it should be
+
+     - Worst case: each element at position $i$ will need $i$ comparisons
+       - A list that sorted in the reverse order, such as `[4,3,2,1]` to
+         `[1,2,3,4]`
+     - Average case: each element at position $i$ will need about $\frac i 2$
+       comparisons
+       - A list that is randomly ordered, such as `[3,1,4,2]` to `[1,2,3,4]`
+
+   - Dividing the total operation summation by 2 (for average case) gives us
+     $\frac{n(n-1)}{4}$
+     - This simplifies to approximately $\frac{n^2}{4}$ operations
+
+4. Big O:
+   - While we calculated $\frac{n^2}{4}$ operations
+   - In Big O notation, we drop constant factors
+   - Therefore, the average case complexity is $O(n^2)$
 
 ## Task 2
 
