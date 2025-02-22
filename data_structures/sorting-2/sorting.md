@@ -44,6 +44,62 @@ Proving Insertion Sort's Average Case $O(n^2)$:
    - In Big O notation, we drop constant factors
    - Therefore, the average case complexity is $O(n^2)$
 
+**ASCII Art Figure**:
+
+```txt
+Initial Array: [5, 2, 4, 1, 3]
+
+Pass 1: Compare element 2 with element 1
+[5, 2, 4, 1, 3] -> [2, 5, 4, 1, 3]
+ ^  ^
+  Compare 2 with 5
+  2 < 5
+  Swap 5 and 2
+  Leftmost element, done
+
+Pass 2: Compare element 3 with previous elements
+[2, 5, 4, 1, 3] -> [2, 4, 5, 1, 3]
+    ^  ^
+    Compare 4 with 5
+    4 < 5
+    Swap 5 and 4
+    Compare 4 and 2
+    4 > 2
+    Do not swap, done
+
+Pass 3: Compare element 4 with previous elements
+[2, 4, 5, 1, 3] -> [2, 4, 1, 5, 3] -> [2, 1, 4, 5, 3] -> [1, 2, 4, 5, 3]
+       ^  ^            ^  ^            ^  ^
+    Multiple swaps to move 1 to correct position:
+      Compare 1 with 5
+      1 < 5
+      Swap 5 and 1
+      Compare 1 with 4
+      1 < 4
+      Swap 4 and 1
+      Compare 1 with 2
+      1 < 2
+      Swap 2 and 1
+      Leftmost element, done
+
+Pass 4: Compare element 5 with previous elements
+[1, 2, 4, 5, 3] -> [1, 2, 4, 3, 5] -> [1, 2, 3, 4, 5]
+          ^  ^            ^  ^
+    Compare 3 with 5
+    3 < 5
+    Swap 5 and 3
+    Compare 3 with 4
+    3 < 4
+    Swap 3 and 4
+    Compare 3 with 2
+    3 > 2
+    Do not swap, done
+
+    Was last element (array is sorted), return
+
+Final Sorted Array: [1, 2, 3, 4, 5]
+```
+
 ## Task 2
 
 > At the start of the insertion sort, the index of the inspected value is set
