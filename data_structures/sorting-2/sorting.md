@@ -159,7 +159,7 @@ function containsX(string) {
 This improved version:
 
 - Best case: $O(1)$, if `X` is at the beginning
-- Average case: $O(\frac n 2) = O(n)$, if `X` is in the middle
+- Average case: $O(\frac n 2)$, if `X` is in the middle
 - Worst case: $O(n)$, if `X` is at the end or not present
 
 The main improvement is the early return when `X` is found, avoiding unnecessary
