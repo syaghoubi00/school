@@ -9,7 +9,7 @@
 > Linear search will take $O(n)$. Write a code in C++/Python to improve the
 > search operation efficiency from $O(n)$ to $O(1)$.
 
-_see_: (./task-1.py)
+_see_: [Task-1 (python)](task-1.py)
 
 ## Task 2
 
