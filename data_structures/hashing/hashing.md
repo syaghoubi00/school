@@ -9,13 +9,16 @@
 > Linear search will take $O(n)$. Write a code in C++/Python to improve the
 > search operation efficiency from $O(n)$ to $O(1)$.
 
-_see_: [Task-1 (python)](task-1.py)
+_see_:
+
+- [Task-1 (python)](task-1.py)
+- [Task-1 (c++)](task-1.cpp)
 
 ## Task 2
 
 > Use C++, generate hash value of your name.
 
-_see_: (./task-2.cpp)
+_see_: [Task-2](task-2.cpp)
 
 ## Task 3
 
