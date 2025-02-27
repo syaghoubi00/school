@@ -2,12 +2,12 @@
 
 ## Task 1
 
-> Assume you have a simple single-dimensional array
+> Assume you have a simple single-dimensional array:
 >
 > `array = [200, 400, 100, 50, 350]`
 >
 > Linear search will take $O(n)$. Write a code in C++/Python to improve the
-> search operation efficiency from $O(n)$ to $O(1)$.
+> search operation efficiency from O(n) to O(1)
 
 _see_:
 
@@ -16,11 +16,11 @@ _see_:
 
 ## Task 2
 
-> Use C++, generate hash value of your name.
+> Use C++, generate hash value of your name
 
 _see_: [Task-2](task-2.cpp)
 
 ## Task 3
 
-> With the help of a figure, explain the problem that occured due to introducing
-> a tombstone to mark the deleted cell.
+> With the help of a figure, explain the problem that occurred due to
+> introducing a tombstone to mark the deleted cell
