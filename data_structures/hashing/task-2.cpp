@@ -50,8 +50,8 @@ int main() {
   hashInput(input);
   std::cout << "---" << std::endl;
 
-  std::cout << "Bonus Task:" << std::endl;
-  bounus_task(input);
+  // std::cout << "Bonus Task:" << std::endl;
+  // bounus_task(input);
 
   return 0;
 }
