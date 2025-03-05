@@ -60,9 +60,9 @@ if __name__ == "__main__":
     d.update({"k5": "v5", "k6": "v6", "k7": "v7"})  # Add multiple key-value pairs
     print(d)  # Print the dictionary
     k = "k1"
-    nk = "k99"
-    print(d.get(k, -1))  # Print the value of the key k ("k1": "v1")
-    print(d.get(nk, -1))  # Print -1 if not found
+    nk = "k9"
+    print(f"Value of {k}: {d.get(k, -1)}")  # Print the value of the key k ("k1": "v1")
+    print(f"Value of {nk}: {d.get(nk, -1)}")  # Print -1 if not found
 
     """Converting the original array to a dictionary"""
     array = [200, 400, 100, 50, 350]
