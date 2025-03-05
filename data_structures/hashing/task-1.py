@@ -56,6 +56,9 @@ def find_element(dictionary: dict, value: int) -> int:
 if __name__ == "__main__":
     """Simple Dictionary Creation and Lookup"""
     d = {"k1": "v1", "k2": "v2", "k3": "v3"}
+    d["k4"] = "v4"  # Add a new key-value pair
+    d.update({"k5": "v5", "k6": "v6", "k7": "v7"})  # Add multiple key-value pairs
+    print(d)  # Print the dictionary
     k = "k1"
     nk = "k99"
     print(d.get(k, -1))  # Print the value of the key k ("k1": "v1")
