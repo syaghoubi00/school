@@ -34,7 +34,7 @@ def create_lookup_table(array: list[int]) -> dict[int, int]:
         A dictionary mapping each value to its index in the array.
 
     """
-    return {value: index for index, value in enumerate(array)}
+    return {item: index for index, item in enumerate(array)}
 
 
 def find_element(dictionary: dict, value: int) -> int:
