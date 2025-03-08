@@ -52,7 +52,7 @@ A hash table with some elements:
 
 #### Approach 1: Simple Nullification (Problematic)
 
-```
+```txt
 // If we delete "banana" at index 2 and just set to null:
  Index | Value   | Status
 -------|---------|--------
