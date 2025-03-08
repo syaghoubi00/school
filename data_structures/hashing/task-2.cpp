@@ -1,7 +1,6 @@
 #include <functional> // for std::hash - provides the hash function template
 #include <iostream>
 #include <string>
-#include <unordered_set>
 
 std::string userInput() {
   std::string input;
