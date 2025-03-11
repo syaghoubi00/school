@@ -45,6 +45,35 @@ Pop(S): [4, 1, null, null, null, null]
 > DEQUEUE(Q), ENQUEUE(Q,8), and DEQUEUE(Q) on an initially empty queue $Q$
 > stored in array $Q[1..6]$. **_Code is not required._**
 
+```txt
+Array Q[1..6]: [null, null, null, null, null, null]
+                 Front = 0, Rear = 0 (empty queue)
+
+ENQUEUE(Q,4): [4, null, null, null, null, null]
+               ^
+              Front = 1, Rear = 1
+
+ENQUEUE(Q,1): [4, 1, null, null, null, null]
+               ^  ^
+              Front = 1, Rear = 2
+
+ENQUEUE(Q,3): [4, 1, 3, null, null, null]
+               ^     ^
+              Front = 1, Rear = 3
+
+DEQUEUE(Q): [null, 1, 3, null, null, null]
+              ^    ^  ^
+            Front = 2, Rear = 3
+
+ENQUEUE(Q,8): [null, 1, 3, 8, null, null]
+                     ^     ^
+                    Front = 2, Rear = 4
+
+DEQUEUE(Q): [null, null, 3, 8, null, null]
+                    ^    ^  ^
+                  Front = 3, Rear = 4
+```
+
 ## Task 3
 
 > Rewrite ENQUEUE and DEQUEUE to detect **_underflow_** and **_overflow_** of a
