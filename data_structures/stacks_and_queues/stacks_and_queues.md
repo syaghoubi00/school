@@ -125,3 +125,45 @@ DEQUEUE(Q):
 > (double-ended queue) allows insertion and deletion at both ends. Write four
 > $O(1)$-time procedures to insert elements into and delete elements from both
 > ends of a deque implemented by an array. **_Code is not required._**
+
+A deque is effectively a combination of a stack and a queue. It allows `ENQUEUE`
+and `DEQUEUE` to add to the queue, while also allowing `PUSH` to the `Q.head`
+and `POP` to the `Q.tail`. This allows for insertion and deletion at both ends
+of the queue, instead of following the FIFO principle of a regular queue.
+
+1. Add to the front of the queue: `ENQUEUE.HEAD(Q,x)`
+2. Add to the back of the queue: `ENQUEUE.TAIL(Q,x)` (same as `ENQUEUE`)
+3. Remove from the front of the queue: `DEQUEUE.HEAD(Q)` (Same as `DEQUEUE`)
+4. Remove from the back of the queue: `DEQUEUE.TAIL(Q)`
+
+`.HEAD` and `.TAIL` would use a pointer to the front and back of the queue and
+would implement different functions based on whether the operation is acting on
+`ENQUEUE` or `DEQUEUE`.
+
+- `ENQUEUE.HEAD`: `PUSH`, adds an element to the front of the queue (`HEAD-1`)
+- `ENQUEUE.TAIL`: `ENQUEUE`, adds an element to the back of the queue (`TAIL+1`)
+- `DEQUEUE.HEAD`: `DEQUEUE`, removes an element from the front of the queue
+  (`HEAD`)
+- `DEQUEUE.TAIL`: `POP`, removes an element from the back of the queue (`TAIL`)
+
+```txt
+Array DQ[1..6]: [null, null, "a", "b", "c", null]
+                              ^         ^
+                          Front = 3, Rear = 5
+
+ENQUEUE.HEAD(DQ, "d"): [null, "d", "a", "b", "c", null]
+                               ^              ^
+                             Front = 2, Rear = 5
+
+ENQUEUE.TAIL(DQ, "e"): [null, "d", "a", "b", "c", "e"]
+                               ^                   ^
+                                Front = 2, Rear = 6
+
+DEQUEUE.HEAD(DQ): [null, null, "a", "b", "c", "e"]
+                          ^     ^              ^
+                               Front = 3, Rear = 6
+
+DEQUEUE.TAIL(DQ): [null, null, "a", "b", "c", null]
+                                ^         ^    ^
+                             Front = 3, Rear = 5
+```
