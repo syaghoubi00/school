@@ -79,6 +79,45 @@ DEQUEUE(Q): [null, null, 3, 8, null, null]
 > Rewrite ENQUEUE and DEQUEUE to detect **_underflow_** and **_overflow_** of a
 > queue. (see Listings 4 & 5 in the book). **_Code is not required._**
 
+### Modified ENQUEUE
+
+Modified code checks for overflow by comparing the head and tail pointers. If
+adding a new element would make the tail pointer land on the head, or if
+wrapping around would make the tail pointer land on the head, the queue is full
+(no available indexes to insert new value) and an error occurs.
+
+```txt
+ENQUEUE(Q,x):
+  if Q.head == Q.tail + 1 or              // If adding a new element would make the tail pointer land on the head
+    (Q.head == 1 and Q.tail == Q.length)  // Or if wrapping around would make the tail pointer land on the head
+    error "Queue overflow" // Queue is full
+  else                     // If the queue is not full
+    Q[Q.tail] = x          // Store the new element at the tail
+    if Q.tail == Q.length    // If the tail is at the end of the array
+        Q.tail = 1           // Wrap around to the beginning
+    else Q.tail = Q.tail + 1 // Otherwise, advance the tail
+```
+
+### Modified DEQUEUE
+
+Modified code checks for underflow by comparing the head and tail pointers. If
+they are equal, the queue is empty, so dequeueing is not possible and an error
+occurs. The error handling could be written in a way to be a soft error (eg.
+returning `null`) to prevent crashing, since no data would be lost.
+
+```txt
+DEQUEUE(Q):
+  if Q.head == Q.tail // Check for underflow - queue is empty when head equals tail
+      error "Queue underflow"
+  else
+      x = Q[Q.head]         // Set x to the element at the head
+      if Q.head == Q.length // If the head is at the end of the array
+          Q.head = 1        // Wrap around to the beginning
+      else
+          Q.head = Q.head + 1 // Otherwise, advance the head
+      return x // Return the element at the head
+```
+
 ## Task 4
 
 > A stack allows insertion and deletion of elements at only end, and a queue
