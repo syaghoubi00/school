@@ -218,31 +218,27 @@ ProgramOptions parseArguments(int argc, char *argv[]) {
     if (arg.rfind("--sort=", 0) == 0) {
       // --sort=method format
       std::string sortMethodStr = arg.substr(7); // Skip "--sort="
-      if (sortMethodStr == "total" || sortMethodStr == "totalSales") {
+      if (sortMethodStr == "total") {
         options.sortMethod = SortMethod::TOTAL_SALES;
-      } else if (sortMethodStr == "average" ||
-                 sortMethodStr == "averageSales") {
+      } else if (sortMethodStr == "average") {
         options.sortMethod = SortMethod::AVERAGE_SALES;
       } else {
         std::cout << "Unknown sort method: " << sortMethodStr << std::endl;
-        std::cout << "Valid methods are: 'total', 'totalSales', 'average', "
-                     "'averageSales'"
+        std::cout << "Valid methods are: 'total', 'average'"
+
                   << std::endl;
         options.helpRequested = true;
       }
     } else if (arg == "--sort" && i + 1 < argc) {
       // --sort followed by method name
       std::string sortMethodStr = argv[++i];
-      if (sortMethodStr == "total" || sortMethodStr == "totalSales") {
+      if (sortMethodStr == "total") {
         options.sortMethod = SortMethod::TOTAL_SALES;
-      } else if (sortMethodStr == "average" ||
-                 sortMethodStr == "averageSales") {
+      } else if (sortMethodStr == "average") {
         options.sortMethod = SortMethod::AVERAGE_SALES;
       } else {
         std::cout << "Unknown sort method: " << sortMethodStr << std::endl;
-        std::cout << "Valid methods are: 'total', 'totalSales', 'average', "
-                     "'averageSales'"
-                  << std::endl;
+        std::cout << "Valid methods are: 'total', 'average'" << std::endl;
         options.helpRequested = true;
       }
     } else if (arg == "--help") {
@@ -254,18 +250,6 @@ ProgramOptions parseArguments(int argc, char *argv[]) {
     } else if (arg.rfind("--file=", 0) == 0) {
       // --file=filename format
       options.filename = arg.substr(7); // Skip "--file="
-    } else if (arg == "--totalSales") {
-      // Keep backward compatibility
-      options.sortMethod = SortMethod::TOTAL_SALES;
-      std::cout
-          << "Warning: --totalSales is deprecated. Use --sort=total instead."
-          << std::endl;
-    } else if (arg == "--averageSales") {
-      // Keep backward compatibility
-      options.sortMethod = SortMethod::AVERAGE_SALES;
-      std::cout << "Warning: --averageSales is deprecated. Use --sort=average "
-                   "instead."
-                << std::endl;
     } else if (arg[0] == '-') {
       std::cout << "Unknown option: " << arg << std::endl;
       options.helpRequested = true; // Trigger help display for unknown options
