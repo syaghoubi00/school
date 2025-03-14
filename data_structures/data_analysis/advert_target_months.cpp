@@ -125,16 +125,20 @@ monthCombos(const std::vector<MonthlySales> &salesData) {
 void sortedMonthSales(const std::vector<SalesCombination> &allCombinations,
                       const std::vector<MonthlySales> &salesData,
                       SortMethod sortMethod) {
+
+  // Make local copy to sort
+  std::vector<SalesCombination> sortedCombinations = allCombinations;
+
   // Sort all combinations based on the specified sort method
   if (sortMethod == SortMethod::AVERAGE_SALES) {
-    std::sort(allCombinations.begin(), allCombinations.end(),
+    std::sort(sortedCombinations.begin(), sortedCombinations.end(),
               [](const SalesCombination &a, const SalesCombination &b) {
                 return a.avgSales > b.avgSales;
               });
     std::cout << "Sorted Combinations by Average Sales (Highest to Lowest):"
               << std::endl;
   } else { // SortMethod::TOTAL_SALES
-    std::sort(allCombinations.begin(), allCombinations.end(),
+    std::sort(sortedCombinations.begin(), sortedCombinations.end(),
               [](const SalesCombination &a, const SalesCombination &b) {
                 return a.totalSales > b.totalSales;
               });
@@ -145,8 +149,8 @@ void sortedMonthSales(const std::vector<SalesCombination> &allCombinations,
   std::cout << "--------------------------------------------------------"
             << std::endl;
 
-  for (int i = 0; i < allCombinations.size(); i++) {
-    const auto &combo = allCombinations[i];
+  for (int i = 0; i < sortedCombinations.size(); i++) {
+    const auto &combo = sortedCombinations[i];
 
     std::cout << i + 1 << ". ";
     // Print the months in this combination
