@@ -120,8 +120,8 @@ monthCombos(const std::vector<MonthlySales> &salesData) {
   return {result, allCombinations};
 }
 
-void sortedMonthSales(std::vector<SalesCombination> allCombinations,
-                      std::vector<MonthlySales> salesData,
+void sortedMonthSales(const std::vector<SalesCombination> &allCombinations,
+                      const std::vector<MonthlySales> &salesData,
                       SortMethod sortMethod) {
   // Sort all combinations based on the specified sort method
   if (sortMethod == SortMethod::AVERAGE_SALES) {
@@ -162,7 +162,8 @@ void sortedMonthSales(std::vector<SalesCombination> allCombinations,
   }
 }
 
-void bestSalesPeriod(std::vector<MonthlySales> salesData, SalesResult result) {
+void bestSalesPeriod(const std::vector<MonthlySales> &salesData,
+                     SalesResult result) {
   // Display the best combination found
   std::cout << "Best sales period found:" << std::endl;
   std::cout << "--------------------------------" << std::endl;
@@ -186,7 +187,8 @@ void bestSalesPeriod(std::vector<MonthlySales> salesData, SalesResult result) {
   std::cout << std::endl;
 }
 
-void recommendation(std::vector<MonthlySales> salesData, SalesResult result) {
+void recommendation(const std::vector<MonthlySales> &salesData,
+                    SalesResult result) {
   // Advertising recommendations
   std::cout << "Advertising Recommendations:" << std::endl;
   std::cout << "--------------------------------" << std::endl;
