@@ -1,6 +1,7 @@
 #include <algorithm>
 #include <fstream>
 #include <iostream>
+#include <optional>
 #include <sstream>
 #include <string>
 #include <utility>
@@ -35,13 +36,14 @@ struct SalesCombination {
   double avgSales;
 };
 
-std::vector<MonthlySales> readSalesDataFromFile(const std::string &filename) {
+std::optional<std::vector<MonthlySales>>
+readSalesDataFromFile(const std::string &filename) {
   std::vector<MonthlySales> data;
   std::ifstream file(filename);
 
   if (!file.is_open()) {
-    std::cout << "Error opening file: " << filename << std::endl;
-    return data;
+    std::cerr << "Error opening file: " << filename << std::endl;
+    return std::nullopt;
   }
 
   std::string line;
@@ -300,13 +302,14 @@ int main(int argc, char *argv[]) {
   std::vector<MonthlySales> salesData;
 
   // Load sales data from file if provided
-  if (!options.filename.empty()) {
-    salesData = readSalesDataFromFile(options.filename);
-    if (salesData.empty()) {
-      std::cout << "Error loading data from file: " << options.filename
-                << std::endl;
-      std::cout << "Using default 2023 sales data instead." << std::endl;
-    }
+  auto salesDataOpt = readSalesDataFromFile(options.filename);
+  if (!salesDataOpt) {
+    std::cout << "Error loading data from file: " << options.filename
+              << std::endl;
+    std::cout << "Using default 2023 sales data instead." << std::endl;
+    // Use default data
+  } else {
+    salesData = *salesDataOpt;
   }
 
   // If no file provided or file was empty, use the default data
