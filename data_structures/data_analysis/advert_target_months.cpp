@@ -128,43 +128,79 @@ monthCombos(const std::vector<MonthlySales> &salesData) {
   result.maxAvgSalesLength = 0;
   result.totalSales = 0;
 
-  // For each possible starting month
+  // Pre-compute total sales for length=1 windows (single months)
   for (int start = 0; start < n; start++) {
-    for (int length = 1; length < n; length++) {
-      double totalSales = 0;
+    double totalSales = salesData[start].sales;
+    double avgSales = totalSales; // For length=1, avg = total
 
-      // Calculate total sales for this combination of months
-      for (int offset = 0; offset < length; offset++) {
-        int idx =
-            (start + offset) % n; // Wrap around using modulo for circular year
-        totalSales += salesData[idx].sales;
-      }
+    // Store this combination in our list of all combinations
+    allCombinations.push_back({start, 1, totalSales, avgSales});
+  }
 
-      // Calculate average monthly sales for this period
-      double avgSales = totalSales / length;
+  /**
+   * Sliding window approach to find best period
+   * Reduces time complexity from O(n^3) to O(n^2)
+   * Instead of recalculating sum for each period, we slide the window
+   * If the total sales for (start=0, length=3) has already been calculated,
+   * and now you're calculating (start=0, length=4), you're repeating the
+   * addition of the first three months.
+   */
 
-      // We only consider periods longer than 1 month for the best period
-      // Single months aren't as interesting for advertising strategy
-      if (length > 1 && avgSales > result.maxAvgSales) {
-        // Found a better average - update our best result
-        result.maxAvgSales = avgSales;
-        result.maxAvgSalesStart = start;
-        result.maxAvgSalesLength = length;
-        result.totalSales = totalSales;
-      }
-      // If we have equal average but longer consecutive period, prefer the
-      // longer one
-      else if (avgSales == result.maxAvgSales &&
-               length > result.maxAvgSalesLength) {
-        result.maxAvgSales = avgSales;
-        result.maxAvgSalesStart = start;
-        result.maxAvgSalesLength = length;
-        result.totalSales = totalSales;
-      }
-
-      // Store this combination in our list of all combinations
-      allCombinations.push_back({start, length, totalSales, avgSales});
+  // For each possible window length > 1
+  // Only consider lengths to n-1 (exclude length=n case)
+  // 12 month total is the same for every period
+  for (int length = 2; length < n; length++) {
+    // Calculate initial window sum (only done once per length)
+    double windowSum = 0;
+    for (int i = 0; i < length; i++) {
+      windowSum += salesData[i].sales;
     }
+
+    double bestSum = windowSum;
+    int bestStart = 0;
+
+    // Add first window to combinations
+    double avgSales = windowSum / length;
+    allCombinations.push_back({0, length, windowSum, avgSales});
+
+    // Slide the window one element at a time
+    for (int start = 1; start < n; start++) {
+      // Remove first element, add new element
+      windowSum = windowSum - salesData[start - 1].sales +
+                  salesData[(start + length - 1) % n].sales;
+
+      // Add this window to combinations
+      avgSales = windowSum / length;
+      allCombinations.push_back({start, length, windowSum, avgSales});
+
+      if (windowSum > bestSum) {
+        bestSum = windowSum;
+        bestStart = start;
+      }
+    }
+
+    // Check if this length's best average is better than our overall best
+    // Prefer longer periods if average sales are equal
+    double bestAvgSales = bestSum / length;
+    if (length > 1 && (bestAvgSales > result.maxAvgSales ||
+                       (bestAvgSales == result.maxAvgSales &&
+                        length > result.maxAvgSalesLength))) {
+      result.maxAvgSales = bestAvgSales;
+      result.maxAvgSalesStart = bestStart;
+      result.maxAvgSalesLength = length;
+      result.totalSales = bestSum;
+    }
+  }
+
+  // Include the full-year combination in our list
+  // (we'll only add it once since all starting positions give same result)
+  if (n > 0) { // Safety check
+    double totalYearlySales = 0;
+    for (int i = 0; i < n; i++) {
+      totalYearlySales += salesData[i].sales;
+    }
+    double avgYearlySales = totalYearlySales / n;
+    allCombinations.push_back({0, n, totalYearlySales, avgYearlySales});
   }
 
   return {result, allCombinations};

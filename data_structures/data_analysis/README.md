@@ -43,17 +43,15 @@ d. What are the limitations of the solution you proposed in part a?
    semi-structured format, such as CSV, where each month is associated with its
    sales value.
 
-2. **Finding the Best Sales Period**: I would examine all possible consecutive
-   month combinations to find the period with highest average sales. This
-   includes:
+2. **Finding the Best Sales Period**: I would use a sliding window algorithm to
+   find the period with highest average sales:
 
-   - Considering every possible starting month
-   - For each starting month, analyzing all possible period lengths (from 1 to
-     12 months)
-   - Since months form an annual cycle, I need to account for periods that wrap
-     around from December to January.
-   - For each combination, calculating the average monthly sales
-   - Tracking which combination yields the highest average
+   - Initialize variables to track the best period and its sales metrics
+   - For each possible window size (from 1 to 12 months)
+   - For each possible starting point, calculate the total and average sales for
+     that window
+   - Keep track of the window with the highest average sales
+   - Consider periods that might wrap around from December to January
 
 3. **Identifying Target Advertising Months**: Once I find the period with
    highest average sales, I would determine:
@@ -65,60 +63,76 @@ d. What are the limitations of the solution you proposed in part a?
 See: [code](./advert_target_months.cpp)
 
 1. Reads sales data from a file or uses default data if no file is provided
-2. Calculates all possible consecutive month combinations
+2. Uses a sliding window approach to calculate all possible consecutive month
+   combinations
 3. Finds the combination with the highest average monthly sales
 4. Identifies the months before and after the best period for targeted
    advertising
 5. Provides command-line options for sorting by different metrics (average or
    total sales)
 
-The key algorithm is in the `monthCombos` function, which:
+The key algorithm uses a sliding window approach, which:
 
-- Considers all possible starting months
-- For each start, considers all possible period lengths
-- Calculates average sales for each period
+- Considers all possible window sizes (period lengths)
+- For each window size, slides the window through all possible starting
+  positions
+- Efficiently calculates average sales for each window
 - Tracks the best period found
 
 ## Task c: O(N) Notation and Pseudocode
 
 **Time Complexity Analysis**:
 
-- The main algorithm has three nested loops:
-  - The outer loop runs n times (for each starting month)
-  - The middle loop runs n times (for each possible length)
-  - The inner loop runs up to n times (for each month in the period)
-- This gives us a time complexity of $O(N^3)$
+- The algorithm has two nested loops:
+  - The outer loop runs $n$ times (for each possible window size)
+  - The inner loop runs $n$ times (for each possible starting position)
+  - For each window, we do $O(1)$ work to calculate the new window
+- This gives us a time complexity of $O(N^2)$
 
 **Pseudocode**:
 
 ```text
-// O(n) over all months
-// Set the starting month for the loop
-// Loop 1: Jan, Loop 2: Feb, ...
-for (startMonth = 0; startMonth < endMonth; startMonth++)
-  // O(n) over all possible period lengths
-  // For each possible period length
-  // eg. 1 month, 2 months, ...
-  for (curStartMonth = 0; curStartMonth < endMonth; curStartMonth++)
-    // O(n) over all months in the period
-    // Calculate total sales for this period
-    for (startMonth = 0; startMonth < curStartMonth; startMonth++)
-      // Calculate total sales for this period
-      totalSales += salesData[startMonth].sales
+// Find the best consecutive period using sliding window
+function findBestPeriod(salesData, months):
+    bestAvg = 0
+    bestPeriod = null
 
-    avgSales = totalSales / periodLength
+    // For each possible window size
+    for windowSize = 1 to months.length:
+
+        // Calculate initial window sum
+        windowSum = sum of first windowSize elements
+        windowAvg = windowSum / windowSize
+
+        // Track best window
+        if windowAvg > bestAvg:
+            bestAvg = windowAvg
+            bestPeriod = {start: 0, length: windowSize}
+
+        // Slide the window through all positions
+        for startIdx = 1 to months.length - 1:
+            // Remove previous element, add new element
+            windowSum = windowSum - salesData[(startIdx-1) % months.length] + salesData[(startIdx+windowSize-1) % months.length]
+            windowAvg = windowSum / windowSize
+
+            if windowAvg > bestAvg:
+                bestAvg = windowAvg
+                bestPeriod = {start: startIdx, length: windowSize}
+
+    return bestPeriod
 ```
 
 ## Task d: Limitations of the Solution
 
 The solution has several limitations:
 
-1. **Computational Efficiency**: The current solution has exponential time
-   complexity, which is inefficient for large datasets. For 12 months it's fine,
-   but for larger datasets it would be problematic.
+1. **Computational Efficiency**: While the sliding window approach is more
+   efficient than calculating all combinations $O(N^3)$ -- it still has $O(N^2)$
+   time complexity. This might be slow for large datasets, but since we have a
+   maximum of 12 months, it should be acceptable. As it will never be more than
+   144 iterations.
 
-2. **Memory Usage**: The algorithm stores all possible combinations, which uses
-   $O(N^2)$ space.
+2. **Memory Usage**: The algorithm uses $O(N)$ space.
 
 3. **Simplistic Model**: The solution doesn't account for:
 
@@ -128,8 +142,8 @@ The solution has several limitations:
      better in lower-cost months)
 
 4. **Equal Averages Handling**: When multiple periods have the same average
-   sales, the algorithm prefers longer periods, which might not always be the
-   optimal business decision.
+   sales, the algorithm prefers the first one found, which might not always be
+   the optimal business decision.
 
 5. **Limited Data**: Analyzing only one year of data might not capture long-term
    trends.
