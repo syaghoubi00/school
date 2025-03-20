@@ -7,6 +7,93 @@
 > diagram showing what the binary search tree would look like. Remember, the
 > numbers are being inserted in the order presented here.
 
+```txt
+Step 1: Insert 1
+    1
+
+Step 2: Insert 5 (greater than 1, goes to the right)
+    1
+     \
+      5
+
+Step 3: Insert 9 (greater than 1 and 5, goes to the right of 5)
+    1
+     \
+      5
+       \
+        9
+
+Step 4: Insert 2 (greater than 1 but less than 5, goes to the right of 1 and left of 5)
+    1
+     \
+      5
+     / \
+    2   9
+
+Step 5: Insert 4 (greater than 1 and 2 but less than 5, goes to the right of 2)
+    1
+     \
+      5
+     / \
+    2   9
+     \
+      4
+
+Step 6: Insert 10 (greater than 1, 5, and 9, goes to the right of 9)
+    1
+     \
+      5
+     / \
+    2   9
+     \   \
+      4   10
+
+Step 7: Insert 6 (greater than 1 and 5 but less than 9, goes to the left of 9)
+        1
+         \
+          5
+        /   \
+       2     9
+        \   / \
+         4 6   10
+
+Step 8: Insert 3 (greater than 1 and 2 but less than 4 and 5, goes to the left of 4)
+        1
+         \
+          5
+        /   \
+       2     9
+        \   / \
+         4 6   10
+        /
+       3
+
+Step 9: Insert 8 (greater than 1, 5, and 6 but less than 9, goes to the right of 6)
+    1
+     \
+      5
+     /  \
+    2    9
+     \  /  \
+     4  6  10
+     /  \
+    3    8
+```
+
+Final tree:
+
+```txt
+       1
+        \
+         5
+       /   \
+      2     9
+       \   / \
+        4 6  10
+       /   \
+      3     8
+```
+
 ## Task 2
 
 > If a well-balanced binary search tree contains 1,000 values, what is the
