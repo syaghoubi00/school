@@ -62,6 +62,24 @@ public:
     printInOrderHelper(root);
     std::cout << std::endl;
   }
+
+  T max() {
+    // Check if tree is empty
+    if (root == nullptr) {
+      throw std::runtime_error("Cannot find max value in an empty tree");
+    }
+
+    // Start at the root
+    BSTNode<T> *current = root;
+
+    // Keep going right until we reach a node with no right child
+    while (current->right != nullptr) {
+      current = current->right;
+    }
+
+    // Return the data of the rightmost node
+    return current->data;
+  }
 };
 
 int main() {
@@ -80,6 +98,9 @@ int main() {
   // Print the tree in-order to verify it's working
   // This should output the elements in sorted order
   bst.printInOrder();
+
+  // Use the max method to find the maximum value in the tree
+  std::cout << "Max value in the tree: " << bst.max() << std::endl;
 
   return 0;
 }

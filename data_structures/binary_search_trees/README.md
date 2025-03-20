@@ -114,9 +114,9 @@ The greatest value in a binary search tree is the rightmost node. To find the
 rightmost node, we keep traversing to the right until we reach a node with no
 right child.
 
-<!--See: [C++ Code](bst.cpp)-->
+See: [C++ Code](bst.cpp)
 
-Pseudocode:
+**Pseudocode**:
 
 ```txt
 function findMax(node):
