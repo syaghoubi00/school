@@ -99,6 +99,13 @@ Final tree:
 > If a well-balanced binary search tree contains 1,000 values, what is the
 > maximum number of steps it would take to search for a value within it?
 
+The search efficiency of a well balanced binary search tree is $O(log N)$.
+
+The maximum steps would be $log_2(1000) = 9.97 \approx 10$.
+
+The $O(log N)$ only holds true for a well balanced binary search tree. As
+imbalance increases, the complexity moves closer to $O(N)$.
+
 ## Task 3
 
 > Write an algorithm that finds the greatest value within a binary search tree.
