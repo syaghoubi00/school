@@ -134,3 +134,5 @@ function findMax(node):
 
 > Write a code in C++ using the same array mentioned in [Task 1](#task-1) and
 > implement a binary search tree. Only insertion operation is required.
+
+See: [C++ Code](bst.cpp)
