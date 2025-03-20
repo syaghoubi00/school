@@ -110,6 +110,26 @@ imbalance increases, the complexity moves closer to $O(N)$.
 
 > Write an algorithm that finds the greatest value within a binary search tree.
 
+The greatest value in a binary search tree is the rightmost node. To find the
+rightmost node, we keep traversing to the right until we reach a node with no
+right child.
+
+<!--See: [C++ Code](bst.cpp)-->
+
+Pseudocode:
+
+```txt
+function findMax(node):
+  if node is null: // Check if the tree is empty (null root node)
+    return null
+  else  // If the tree is not empty then keep traversing to the right
+    while node.right is not null: // Traverse to the right until we reach the rightmost node
+      max = node.right  // Set the max to the right child of the current !null node
+      node = node.right // Move to the next child, when the next child is null, the loop will break
+                        // with the max set to the rightmost non-null child
+    return max // return the rightmost node
+```
+
 ## Task 4
 
 > Write a code in C++ using the same array mentioned in [Task 1](#task-1) and
