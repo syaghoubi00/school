@@ -24,6 +24,11 @@
 > end
 > ```
 
+The base case is what stops the recursion from continuing indefinitely. In this
+case, the base case is: `return if low > high`. This means that when the `low`
+number exceeds the `high` number, the function will stop calling itself and
+return, effectively ending the recursion.
+
 ## Task 2
 
 > My kid was playing with my computer and changed my factorial function so that
