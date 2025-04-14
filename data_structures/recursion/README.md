@@ -42,6 +42,20 @@ return, effectively ending the recursion.
 > end
 > ```
 
+Python code:
+
+```python
+def factorial(n):
+    if n == 0:
+        return 1
+    else:
+        return n * factorial(n - 2)
+```
+
+The recursive factorial function will not compute the factorial of 10 correctly.
+It will only compute the product of every second number down to 1. This will
+result in `3840` instead of the correct factorial value of `3628800`.
+
 ## Task 3
 
 > Following is a function in which we pass in two numbers called low and high.
