@@ -112,6 +112,8 @@ numbers from `low` to `high` by recursively calling itself with `high - 1`.
 >
 > Write a recursive function that prints all the numbers (and just numbers).
 
+Python code:
+
 ```python
 def traverse_array(arr):
     for element in arr:
@@ -119,6 +121,20 @@ def traverse_array(arr):
             traverse_array(element)
         else:
             print(element)
+```
+
+C++ code:
+
+```cpp
+void traverseArray(const std::vector<std::any> &arr) {
+  for (const auto &element : arr) {
+    if (element.type() == typeid(std::vector<std::any>)) {
+      traverseArray(std::any_cast<const std::vector<std::any> &>(element));
+    } else {
+      std::cout << std::any_cast<int>(element) << std::endl;
+    }
+  }
+}
 ```
 
 The base case is a for loop which iterates through the array. If the element is
