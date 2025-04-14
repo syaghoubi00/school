@@ -111,3 +111,16 @@ numbers from `low` to `high` by recursively calling itself with `high - 1`.
 > ```
 >
 > Write a recursive function that prints all the numbers (and just numbers).
+
+```python
+def traverse_array(arr):
+    for element in arr:
+        if isinstance(element, list):
+            traverse_array(element)
+        else:
+            print(element)
+```
+
+The base case is a for loop which iterates through the array. If the element is
+itself an array, the function calls itself recursively. If the element is a
+number, it prints the number.
