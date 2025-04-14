@@ -70,6 +70,20 @@ result in `3840` instead of the correct factorial value of `3628800`.
 > end
 > ```
 
+We can add the following base case to the function:
+
+```python
+def sum(low: int, high: int) -> int:
+    if high == 0:
+        return 0
+    else:
+        return high + sum(low, high - 1)
+```
+
+This base case checks if `high` is equal to `0`. If it is, the function returns
+`0`, effectively stopping the recursion. Otherwise, it continues to sum the
+numbers from `low` to `high` by recursively calling itself with `high - 1`.
+
 ## Task 4
 
 > Here is an array containing both numbers as well as other arrays, which in
