@@ -21,7 +21,15 @@ A ----- B
 C ----- D
 ```
 
-Vertex,Edge,Weight A,B,2 A,C,1 B,D,-2 C,D,3
+Vertex,Edge,Weight
+
+A,B,2
+
+A,C,1
+
+B,D,-2
+
+C,D,3
 
 Finding the shortest path from A to D using Dijkstra's algorithm:
 
