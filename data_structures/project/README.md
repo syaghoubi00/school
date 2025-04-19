@@ -48,7 +48,7 @@
 >
 > **Your job is to optimize the function so that it can run just $O(N + M)$.**
 
-See: [Task 1](./task_1.cpp)
+See: [Task 1](./task1.cpp)
 
 ## Task 2
 
@@ -73,7 +73,7 @@ See: [Task 1](./task_1.cpp)
 >
 > **Your job is to optimize the code so that it has a runtime of $O(N)$.**
 
-See: [Task 2](./task_2.cpp)
+See: [Task 2](./task2.cpp)
 
 ## Task 3
 
@@ -107,7 +107,7 @@ See: [Task 2](./task_2.cpp)
 > **Your job is to optimize the code so that the function clocks in at just
 > $O(N)$.**
 
-See: [Task 3](./task_3.cpp)
+See: [Task 3](./task3.cpp)
 
 ## Task 4
 
@@ -122,7 +122,7 @@ See: [Task 3](./task_3.cpp)
 > would take $O(N^2)$ time. **Your job is to optimize the function so that it’s
 > a speedy $O(N)$.**
 
-See: [Task 4](./task_4.cpp)
+See: [Task 4](./task4.cpp)
 
 ## Task 5
 
@@ -147,7 +147,7 @@ See: [Task 4](./task_4.cpp)
 > $O(N)$. It may be $N$ multiplied by a constant, but that’s still considered
 > $O(N)$.
 
-See: [Task 5](./task_5.cpp)
+See: [Task 5](./task5.cpp)
 
 ## Task 6
 
@@ -172,4 +172,4 @@ See: [Task 5](./task_5.cpp)
 >
 > **Your job is to optimize the function so that it takes $O(N)$ time.**
 
-See: [Task 6](./task_6.cpp)
+See: [Task 6](./task6.cpp)
