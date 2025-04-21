@@ -1,4 +1,4 @@
-# Task
+# Tasks
 
 a) Use 100, 200, and 300 million elements of the same data type to compare
 arrays' and linked-lists' performances using C++. You might have to use
@@ -36,7 +36,7 @@ where applicable and explain the findings clearly.
 
 The first step I took was to create the necessary functions to add and remove
 from the beginning and end of the array and linked list. Note, I used vectors
-instead of arrays, because they are preffered in C++.
+instead of arrays, because they are preferred in C++.
 
 Vector functions:
 
@@ -83,7 +83,7 @@ The first step was to convert the provided Java code to C++ code. Once I had the
 translated code, I had to create the `authorsList` with fake author names, as it
 wasn't provided. To do this, I used an old script I wrote which puts together
 random first and last names together. The file with the `authorsList` is parsed
-and pushed to a vector, which is used for the perfonmance tests. I then used
+and pushed to a vector, which is used for the performance tests. I then used
 `std::chrono` for timing the loops again. Since the tests were relatively fast,
 I decided to run each test `10000` times to get a more accurate result. The
 results include the mean and deviation of the `10000` runs.
@@ -92,6 +92,6 @@ Observations:
 
 - Both loops and iterators had similar performance in terms of mean time,
   `+/- 5 microseconds`.
-- Iteraters had a lower deviation by about a factor of 3 (`10 microseconds` vs
+- Iterators had a lower deviation by about a factor of 3 (`10 microseconds` vs
   `30 microseconds`) than loops, which could indicate more consistent
   performance.
