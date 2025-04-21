@@ -32,7 +32,9 @@ are evaluating. Make sure you include this when evaluating the performance. The
 documentation of parts a and b together should not exceed two pages. Use graphs
 where applicable and explain the findings clearly.
 
-## Task a
+## Answers
+
+### Task a
 
 The first step I took was to create the necessary functions to add and remove
 from the beginning and end of the array and linked list. Note, I used vectors
@@ -77,7 +79,7 @@ Observations:
 - Profiling tools such as `gprof` did not provide useful information, so a
   manual approach was used to measure time.
 
-## Task b
+### Task b
 
 The first step was to convert the provided Java code to C++ code. Once I had the
 translated code, I had to create the `authorsList` with fake author names, as it
