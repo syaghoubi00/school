@@ -1,121 +1,64 @@
 #include <chrono>
 #include <fstream>
+#include <iomanip>
 #include <iostream>
 #include <list>
-#include <string>
 #include <vector>
 
 struct PerformanceResult {
   std::string name;
-  int size;
+  size_t elements;
+  size_t memoryGiB;
   long duration;
 };
 
+// Initialize a global vector to store performance results
 std::vector<PerformanceResult> results;
 
-template <typename Func>
-void time(Func func, const std::string &name, int size) {
-  std::cout << name << "..." << std::endl;
-  auto start = std::chrono::high_resolution_clock::now();
-  func(size);
-  auto end = std::chrono::high_resolution_clock::now();
-  auto duration =
-      std::chrono::duration_cast<std::chrono::milliseconds>(end - start)
+template <typename Func, typename Container>
+void time(const std::string name, Func func, Container &items) {
+  // Start the timer
+  std::chrono::time_point start = std::chrono::high_resolution_clock::now();
+
+  // Run the function with the container
+  func(items);
+
+  // End the timer after function execution
+  std::chrono::time_point end = std::chrono::high_resolution_clock::now();
+
+  // Calculate the duration in microseconds
+  long duration =
+      std::chrono::duration_cast<std::chrono::microseconds>(end - start)
           .count();
 
-  results.push_back({name, size, duration});
+  size_t memoryInGiB =
+      sizeof(items) + (items.size() * sizeof(typename Container::value_type)) /
+                          (1024 * 1024 * 1024);
+
+  // Push results to the global vector
+  results.push_back({name, items.size(), memoryInGiB, duration});
 }
 
 /* ARRAYS */
-void addArrBeginning(const int size) {
-  int *arr = new int[size];
-
-  for (int i = 0; i < size; i++) {
-    for (int j = i; j > 0; j--) {
-      arr[j] = arr[j - 1];
-    }
-    arr[0] = i;
-  }
-
-  delete[] arr;
-}
-void addArrEnd(const int size) {
-  int *arr = new int[size];
-
-  for (int i = 0; i < size; i++) {
-    arr[i] = i;
-  };
-
-  delete[] arr;
-};
-void removeArrBeginning(const int size) {
-  int *arr = new int[size];
-  for (int i = 0; i < size; i++) {
-    arr[i] = i;
-  }
-
-  for (int i = 0; i < size - 1; i++) {
-    for (int j = 0; j < size - 1; j++) {
-      arr[j] = arr[j + 1];
-    }
-  }
-
-  delete[] arr;
-}
-void removeArrEnd(const int size) {
-  // First create the array
-  int *arr = new int[size];
-  for (int i = 0; i < size; i++) {
-    arr[i] = i;
-  }
-
-  for (int i = size - 1; i >= 0; i--) {
-    arr[i] = -1;
-  }
-
-  delete[] arr;
-}
+void arrAddToBeg(std::vector<int> &vec) { vec.insert(vec.begin(), 0); }
+void arrAddToEnd(std::vector<int> &vec) { vec.push_back(0); }
+void arrRemoveFromBeg(std::vector<int> &vec) { vec.erase(vec.begin()); }
+void arrRemoveFromEnd(std::vector<int> &vec) { vec.pop_back(); }
 
 /* LISTS */
-void addListBeginning(const int size) {
-  std::list<int> list;
-
-  for (int i = 0; i < size; i++) {
-    list.push_front(i);
-  }
-}
-void addListEnd(const int size) {
-  std::list<int> list;
-  for (int i = 0; i < size; i++) {
-    list.push_back(i);
-  }
-}
-void removeListBeginning(const int size) {
-  std::list<int> list;
-  for (int i = 0; i < size; i++) {
-    list.push_back(i);
-  }
-
-  while (!list.empty()) {
-    list.pop_front();
-  }
-}
-void removeListEnd(const int size) {
-  std::list<int> list;
-  for (int i = 0; i < size; i++) {
-    list.push_back(i);
-  }
-
-  while (!list.empty()) {
-    list.pop_back();
-  }
-}
+void listAddToBeg(std::list<int> &list) { list.push_front(0); }
+void listAddToEnd(std::list<int> &list) { list.push_back(0); }
+void listRemoveFromBeg(std::list<int> &list) { list.pop_front(); }
+void listRemoveFromEnd(std::list<int> &list) { list.pop_back(); }
 
 void printResults() {
   std::cout << "Performance Results:" << std::endl;
   for (const auto &result : results) {
-    std::cout << result.name << " with " << result.size
-              << " elements: " << result.duration << " ms" << std::endl;
+    std::cout << result.name << " with " << result.elements << " elements "
+              << "consumed " << std::fixed << std::setprecision(3)
+              << result.memoryGiB << "GiB" << std::defaultfloat
+              << " and took: " << result.duration << " microseconds"
+              << std::endl;
   }
 }
 
@@ -129,12 +72,12 @@ void saveResultsToCSV(const std::string &filename) {
   }
 
   // Write CSV header
-  csvFile << "Name,Size,Duration(ms)" << std::endl;
+  csvFile << "Name,Elements,Memory(GiB),Duration(microseconds)" << std::endl;
 
   // Write each result
   for (const auto &result : results) {
-    csvFile << result.name << "," << result.size << "," << result.duration
-            << std::endl;
+    csvFile << result.name << "," << result.elements << "," << result.memoryGiB
+            << "," << result.duration << std::endl;
   }
 
   csvFile.close();
@@ -142,38 +85,58 @@ void saveResultsToCSV(const std::string &filename) {
 }
 
 int main() {
-  std::string addBeg = "Add to Beginning of ";
-  std::string addEnd = "Add to End of ";
-  std::string removeBeg = "Remove from Beginning of ";
-  std::string removeEnd = "Remove from End of ";
+  std::string addBeg = "Adding to Beginning of ";
+  std::string addEnd = "Adding to End of ";
+  std::string removeBeg = "Removing from Beginning of ";
+  std::string removeEnd = "Removing from End of ";
 
   const int MILLION = 1000000;
-  int small = 100 * MILLION;
-  int medium = 200 * MILLION;
-  int large = 300 * MILLION;
 
+  int multiplier = MILLION;
+
+  int small = 100 * multiplier;
+  int medium = 200 * multiplier;
+  int large = 300 * multiplier;
+
+  // Test Arrays (vector)
   for (int size : {small, medium, large}) {
-    std::cout << "==== Testing with " << size << " elements ====" << std::endl;
+    std::string type = "Array";
+    std::vector<int> vec;
 
-    std::cout << "=== Adding to Beginning ===" << std::endl;
-    time(addArrBeginning, addBeg + "Array", size);
-    time(addListBeginning, addBeg + "List", size);
+    // Fill Vector
+    for (int i = 0; i < size; i++) {
+      vec.push_back(i);
+    }
 
-    std::cout << "=== Adding to End ===" << std::endl;
-    time(addArrEnd, addEnd + "Array", size);
-    time(addListEnd, addEnd + "List", size);
+    std::cout << "Testing Array with " << size << " elements..." << std::endl;
 
-    std::cout << "=== Removing from Beginning ===" << std::endl;
-    time(removeArrBeginning, removeBeg + "Array", size);
-    time(removeListBeginning, removeBeg + "List", size);
+    time(addBeg + type, arrAddToBeg, vec);
+    time(addEnd + type, arrAddToEnd, vec);
+    time(removeBeg + type, arrRemoveFromBeg, vec);
+    time(removeEnd + type, arrRemoveFromEnd, vec);
+  }
 
-    std::cout << "=== Removing from End ===" << std::endl;
-    time(removeArrEnd, removeEnd + "Array", size);
-    time(removeListEnd, removeEnd + "List", size);
+  // Test Lists (std::list)
+  for (int size : {small, medium, large}) {
+    std::string type = "List";
+    std::list<int> list;
+
+    // Fill List
+    for (int i = 0; i < size; i++) {
+      list.push_back(i);
+    }
+
+    std::cout << "Testing List with " << size << " elements..." << std::endl;
+
+    time(addBeg + type, listAddToBeg, list);
+    time(addEnd + type, listAddToEnd, list);
+    time(removeBeg + type, listRemoveFromBeg, list);
+    time(removeEnd + type, listRemoveFromEnd, list);
   }
 
   printResults();
 
+  std::cout << "Saving results to CSV..." << std::endl;
   saveResultsToCSV("performance_results.csv");
 
   return 0;
