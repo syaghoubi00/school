@@ -34,6 +34,16 @@ where applicable and explain the findings clearly.
 
 ## Answers
 
+For Code:
+
+- See: [Task a](./arr_v_list.cpp)
+- See: [Task b](./loop_v_iter.cpp)
+
+For Write Up:
+
+- See: [Task a](#task-a)
+- See: [Task b](#task-b)
+
 ### Task a
 
 The first step I took was to create the necessary functions to add and remove
